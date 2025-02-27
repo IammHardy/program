@@ -3,9 +3,11 @@ const numberElement = document.getElementById("number");
 let purchases = [];
 
 function add() {
-  const price = parseInt(priceElement.value);
+  const name = priceElement.value.split(',')[0];
+  const price = parseInt(priceElement.value.split(',')[1]);
   const number = parseInt(numberElement.value);
   let purchase = {
+    name: name,
     price: price,
     number: number,
   };
@@ -16,7 +18,7 @@ function add() {
 function display() {
   let string = "";
   for (let i = 0; i < purchases.length; i++) {
-    string += `${purchases[i].price}Naira But${purchases[i].number}point\n`;
+    string += `${purchases[i].name} ${purchases[i].price}Naira But${purchases[i].number}point\n`;
   }
   return string;
 }
@@ -32,7 +34,7 @@ function subtotal() {
 function calc() {
   const sum = subtotal();
   const postage = calcPostageFromPurchase(sum);
-  window.alert(`Subtotal is${sum}Naira、Shipping fee are${postage}Naira. The total is${sum + postage}Naira.`);
+  window.alert(`${display()}\n Subtotal is${sum}Naira、Shipping fee are${postage}Naira. The total is${sum + postage}Naira.`);
   purchases = [];
   priceElement.value = "";
   numberElement.value = "";
